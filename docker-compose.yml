@@ -1,24 +1,22 @@
 version: "3.9"
 
 services:
-  service-b:
-    build: ./service-b
-    platform: linux/amd64
-    container_name: service-b
-    ports:
-      - "8082:8082"
-      - "9090:9090"
-    networks:
-      - microservices-network
-
   service-a:
     build: ./service-a
-    platform: linux/amd64
     container_name: service-a
     ports:
       - "8081:8081"
     depends_on:
       - service-b
+    networks:
+      - microservices-network
+
+  service-b:
+    build: ./service-b
+    container_name: service-b
+    ports:
+      - "8082:8082"
+      - "9090:9090"
     networks:
       - microservices-network
 
